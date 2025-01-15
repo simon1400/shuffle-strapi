@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_content_cta_blocks",
+  "info": {
+    "displayName": "ctaBlock",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "customField",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "cta": {
+      "displayName": "cta",
+      "type": "component",
+      "repeatable": false,
+      "component": "action.cta"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_content_comp_description_block_comps",
+  "info": {
+    "displayName": "DescriptionBlockComp",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "contentText": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "action.cta"
+    }
+  }
+}

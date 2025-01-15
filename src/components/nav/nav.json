@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_nav_navs",
+  "info": {
+    "displayName": "Nav",
+    "icon": "dashboard"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "items": {
+      "displayName": "navItem",
+      "type": "component",
+      "repeatable": true,
+      "component": "nav.nav-item",
+      "required": true
+    }
+  }
+}

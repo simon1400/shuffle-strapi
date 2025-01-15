@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_nav_soc_items",
+  "info": {
+    "displayName": "socItem",
+    "icon": "cog"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "facebook",
+        "twitter",
+        "instagram",
+        "linkedin"
+      ],
+      "required": true
+    }
+  }
+}
