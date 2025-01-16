@@ -429,6 +429,55 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCompareCompare extends Struct.SingleTypeSchema {
+  collectionName: 'compares';
+  info: {
+    description: '';
+    displayName: 'Compare';
+    pluralName: 'compares';
+    singularName: 'compare';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    contentText: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dynamicContent: Schema.Attribute.DynamicZone<
+      [
+        'content.short-artciles',
+        'content.logo-carousel',
+        'content.description-block',
+        'content.cta-block',
+        'content.content-item',
+        'content.compare-table',
+      ]
+    > &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::compare.compare'
+    > &
+      Schema.Attribute.Private;
+    metaData: Schema.Attribute.Component<'seo.meta-data', false>;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiContactContact extends Struct.SingleTypeSchema {
   collectionName: 'contacts';
   info: {
@@ -571,6 +620,36 @@ export interface ApiNavigationNavigation extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiParameterParameter extends Struct.CollectionTypeSchema {
+  collectionName: 'parameters';
+  info: {
+    displayName: 'Parameter';
+    pluralName: 'parameters';
+    singularName: 'parameter';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::parameter.parameter'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -584,6 +663,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
   attributes: {
     benefits: Schema.Attribute.Component<'content-comp.benefits', true>;
+    compares: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     content: Schema.Attribute.DynamicZone<
       [
         'content.short-artciles',
@@ -605,6 +685,8 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     metaData: Schema.Attribute.Component<'seo.meta-data', false>;
+    Parameters: Schema.Attribute.Component<'content-comp.parameter', true> &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String &
@@ -1126,10 +1208,12 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
+      'api::compare.compare': ApiCompareCompare;
       'api::contact.contact': ApiContactContact;
       'api::global.global': ApiGlobalGlobal;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::navigation.navigation': ApiNavigationNavigation;
+      'api::parameter.parameter': ApiParameterParameter;
       'api::product.product': ApiProductProduct;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

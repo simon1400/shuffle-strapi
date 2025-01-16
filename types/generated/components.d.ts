@@ -44,6 +44,35 @@ export interface ContentCompDescriptionBlockComp
   };
 }
 
+export interface ContentCompParameter extends Struct.ComponentSchema {
+  collectionName: 'components_content_comp_parameters';
+  info: {
+    description: '';
+    displayName: 'Parameter';
+    icon: 'archive';
+  };
+  attributes: {
+    has: Schema.Attribute.Boolean;
+    parameter: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::parameter.parameter'
+    >;
+    text: Schema.Attribute.String;
+  };
+}
+
+export interface ContentCompareTable extends Struct.ComponentSchema {
+  collectionName: 'components_content_compare_tables';
+  info: {
+    displayName: 'Compare table';
+    icon: 'cast';
+  };
+  attributes: {
+    products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface ContentContentItem extends Struct.ComponentSchema {
   collectionName: 'components_content_content_items';
   info: {
@@ -180,6 +209,8 @@ declare module '@strapi/strapi' {
       'action.cta': ActionCta;
       'content-comp.benefits': ContentCompBenefits;
       'content-comp.description-block-comp': ContentCompDescriptionBlockComp;
+      'content-comp.parameter': ContentCompParameter;
+      'content.compare-table': ContentCompareTable;
       'content.content-item': ContentContentItem;
       'content.cta-block': ContentCtaBlock;
       'content.description-block': ContentDescriptionBlock;

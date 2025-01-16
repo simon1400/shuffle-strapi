@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_content_compare_tables",
+  "info": {
+    "displayName": "Compare table",
+    "icon": "cast"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}

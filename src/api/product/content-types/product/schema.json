@@ -53,6 +53,17 @@
       "type": "component",
       "repeatable": false,
       "component": "seo.meta-data"
+    },
+    "Parameters": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content-comp.parameter",
+      "required": true
+    },
+    "compares": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
     }
   }
 }
