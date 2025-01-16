@@ -565,6 +565,8 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'content.short-artciles',
         'content.logo-carousel',
         'content.description-block',
+        'content.content-item',
+        'content.compare-table',
       ]
     > &
       Schema.Attribute.Required;
@@ -662,7 +664,11 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    benefits: Schema.Attribute.Component<'content-comp.benefits', true>;
+    benefits: Schema.Attribute.Component<
+      'content-comp.description-block-comp',
+      true
+    > &
+      Schema.Attribute.Required;
     compares: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     content: Schema.Attribute.DynamicZone<
       [
@@ -672,12 +678,15 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         'content.cta-block',
         'content.content-item',
       ]
-    >;
+    > &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    image: Schema.Attribute.Media<'images'>;
-    label: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images' | 'videos'> &
+      Schema.Attribute.Required;
+    label: Schema.Attribute.Component<'content-comp.label', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -688,7 +697,8 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     Parameters: Schema.Attribute.Component<'content-comp.parameter', true> &
       Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'>;
+    shortIcon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;

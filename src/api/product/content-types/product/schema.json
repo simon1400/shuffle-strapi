@@ -17,23 +17,18 @@
       "required": true,
       "unique": true
     },
-    "label": {
+    "description": {
       "type": "string",
       "required": true
     },
     "image": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
-        "images"
+        "images",
+        "videos"
       ]
-    },
-    "benefits": {
-      "displayName": "benefits",
-      "type": "component",
-      "repeatable": true,
-      "component": "content-comp.benefits"
     },
     "content": {
       "type": "dynamiczone",
@@ -43,11 +38,13 @@
         "content.description-block",
         "content.cta-block",
         "content.content-item"
-      ]
+      ],
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "metaData": {
       "type": "component",
@@ -64,6 +61,26 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::product.product"
+    },
+    "benefits": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content-comp.description-block-comp",
+      "required": true
+    },
+    "shortIcon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "label": {
+      "displayName": "label",
+      "type": "component",
+      "repeatable": true,
+      "component": "content-comp.label"
     }
   }
 }

@@ -12,11 +12,13 @@ export interface ActionCta extends Struct.ComponentSchema {
   };
 }
 
-export interface ContentCompBenefits extends Struct.ComponentSchema {
-  collectionName: 'components_content_comp_benefits';
+export interface ContentCompDescriptionBlockComp
+  extends Struct.ComponentSchema {
+  collectionName: 'components_content_comp_description_block_comps';
   info: {
-    displayName: 'benefits';
-    icon: 'bold';
+    description: '';
+    displayName: 'DescriptionBlockComp';
+    icon: 'bulletList';
   };
   attributes: {
     contentText: Schema.Attribute.RichText &
@@ -27,20 +29,26 @@ export interface ContentCompBenefits extends Struct.ComponentSchema {
           preset: 'defaultHtml';
         }
       >;
+    cta: Schema.Attribute.Component<'action.cta', false>;
+    icon: Schema.Attribute.Media<'images'>;
   };
 }
 
-export interface ContentCompDescriptionBlockComp
-  extends Struct.ComponentSchema {
-  collectionName: 'components_content_comp_description_block_comps';
+export interface ContentCompLabel extends Struct.ComponentSchema {
+  collectionName: 'components_content_comp_labels';
   info: {
-    displayName: 'DescriptionBlockComp';
-    icon: 'bulletList';
+    description: '';
+    displayName: 'label';
+    icon: 'connector';
   };
   attributes: {
-    contentText: Schema.Attribute.String & Schema.Attribute.Required;
-    cta: Schema.Attribute.Component<'action.cta', false>;
-    icon: Schema.Attribute.Media<'images'>;
+    hexColor: Schema.Attribute.String & Schema.Attribute.Required;
+    invertText: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    text: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
   };
 }
 
@@ -207,8 +215,8 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'action.cta': ActionCta;
-      'content-comp.benefits': ContentCompBenefits;
       'content-comp.description-block-comp': ContentCompDescriptionBlockComp;
+      'content-comp.label': ContentCompLabel;
       'content-comp.parameter': ContentCompParameter;
       'content.compare-table': ContentCompareTable;
       'content.content-item': ContentContentItem;

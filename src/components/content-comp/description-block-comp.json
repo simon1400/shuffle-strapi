@@ -2,25 +2,31 @@
   "collectionName": "components_content_comp_description_block_comps",
   "info": {
     "displayName": "DescriptionBlockComp",
-    "icon": "bulletList"
+    "icon": "bulletList",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "contentText": {
-      "type": "string",
-      "required": true
-    },
     "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "cta": {
       "type": "component",
       "repeatable": false,
       "component": "action.cta"
+    },
+    "contentText": {
+      "type": "customField",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "customField": "plugin::ckeditor5.CKEditor",
+      "required": true
     }
   }
 }
