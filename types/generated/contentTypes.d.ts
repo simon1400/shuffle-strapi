@@ -429,6 +429,43 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCatalogCatalog extends Struct.SingleTypeSchema {
+  collectionName: 'catalogs';
+  info: {
+    displayName: 'Catalog';
+    pluralName: 'catalogs';
+    singularName: 'catalog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::catalog.catalog'
+    > &
+      Schema.Attribute.Private;
+    metaData: Schema.Attribute.Component<'seo.meta-data', false>;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCompareCompare extends Struct.SingleTypeSchema {
   collectionName: 'compares';
   info: {
@@ -669,7 +706,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       true
     > &
       Schema.Attribute.Required;
-    compares: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
+    compare: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     content: Schema.Attribute.DynamicZone<
       [
         'content.short-artciles',
@@ -677,6 +714,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         'content.description-block',
         'content.cta-block',
         'content.content-item',
+        'content.compare-table',
       ]
     > &
       Schema.Attribute.Required;
@@ -697,6 +735,13 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     Parameters: Schema.Attribute.Component<'content-comp.parameter', true> &
       Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    shortContent: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     shortIcon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String &
@@ -1218,6 +1263,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
+      'api::catalog.catalog': ApiCatalogCatalog;
       'api::compare.compare': ApiCompareCompare;
       'api::contact.contact': ApiContactContact;
       'api::global.global': ApiGlobalGlobal;
