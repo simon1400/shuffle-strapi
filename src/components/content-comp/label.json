@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_content_comp_labels",
+  "info": {
+    "displayName": "label",
+    "icon": "connector",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "hexColor": {
+      "type": "string",
+      "required": true
+    },
+    "invertText": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

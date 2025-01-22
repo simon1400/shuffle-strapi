@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_nav_nav_items",
+  "info": {
+    "displayName": "navItem",
+    "icon": "discuss"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_content_logo_carousels",
+  "info": {
+    "displayName": "logoCarousel",
+    "icon": "cog"
+  },
+  "options": {},
+  "attributes": {
+    "logo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
+    }
+  }
+}

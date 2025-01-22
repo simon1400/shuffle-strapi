@@ -1,0 +1,45 @@
+{
+  "kind": "singleType",
+  "collectionName": "compares",
+  "info": {
+    "singularName": "compare",
+    "pluralName": "compares",
+    "displayName": "Compare",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "contentText": {
+      "type": "customField",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "dynamicContent": {
+      "type": "dynamiczone",
+      "components": [
+        "content.short-artciles",
+        "content.logo-carousel",
+        "content.description-block",
+        "content.cta-block",
+        "content.content-item",
+        "content.compare-table"
+      ],
+      "required": true
+    },
+    "metaData": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.meta-data"
+    }
+  }
+}

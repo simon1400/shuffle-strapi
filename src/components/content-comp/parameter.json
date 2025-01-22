@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_content_comp_parameters",
+  "info": {
+    "displayName": "Parameter",
+    "icon": "archive",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "parameter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::parameter.parameter"
+    },
+    "text": {
+      "type": "string"
+    },
+    "has": {
+      "type": "boolean"
+    }
+  }
+}

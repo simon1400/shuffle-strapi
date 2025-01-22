@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_content_description_blocks",
+  "info": {
+    "displayName": "descriptionBlock",
+    "icon": "archive",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "block": {
+      "displayName": "DescriptionBlockComp",
+      "type": "component",
+      "repeatable": true,
+      "component": "content-comp.description-block-comp",
+      "required": true
+    }
+  }
+}

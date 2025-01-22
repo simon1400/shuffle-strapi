@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_content_short_artciles",
+  "info": {
+    "displayName": "shortArtciles",
+    "icon": "crop"
+  },
+  "options": {},
+  "attributes": {
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    }
+  }
+}
