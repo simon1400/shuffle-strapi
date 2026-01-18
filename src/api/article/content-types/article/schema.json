@@ -17,14 +17,6 @@
       "required": true,
       "unique": true
     },
-    "shortContent": {
-      "type": "customField",
-      "options": {
-        "preset": "defaultHtml"
-      },
-      "required": true,
-      "customField": "plugin::ckeditor5.CKEditor"
-    },
     "shortImage": {
       "type": "media",
       "multiple": false,
@@ -42,19 +34,10 @@
         "videos"
       ]
     },
-    "fullContent": {
-      "type": "customField",
-      "options": {
-        "preset": "defaultHtml"
-      },
-      "required": true,
-      "customField": "plugin::ckeditor5.CKEditor"
-    },
     "metaData": {
-      "displayName": "metaData",
       "type": "component",
-      "repeatable": false,
       "component": "seo.meta-data",
+      "repeatable": false,
       "required": false
     },
     "slug": {
@@ -69,8 +52,17 @@
         "content.logo-carousel",
         "content.description-block",
         "content.cta-block",
-        "content.content-item"
+        "content.content-item",
+        "content.image-text-cta"
       ]
+    },
+    "shortContentTest": {
+      "type": "customField",
+      "customField": "plugin::lexical.lexical"
+    },
+    "fullContentTest": {
+      "type": "customField",
+      "customField": "plugin::lexical.lexical"
     }
   }
 }

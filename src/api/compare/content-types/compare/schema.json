@@ -16,14 +16,6 @@
       "type": "string",
       "required": true
     },
-    "contentText": {
-      "type": "customField",
-      "options": {
-        "preset": "defaultHtml"
-      },
-      "required": true,
-      "customField": "plugin::ckeditor5.CKEditor"
-    },
     "dynamicContent": {
       "type": "dynamiczone",
       "components": [
@@ -38,8 +30,12 @@
     },
     "metaData": {
       "type": "component",
-      "repeatable": false,
-      "component": "seo.meta-data"
+      "component": "seo.meta-data",
+      "repeatable": false
+    },
+    "contentTextTest": {
+      "type": "customField",
+      "customField": "plugin::lexical.lexical"
     }
   }
 }

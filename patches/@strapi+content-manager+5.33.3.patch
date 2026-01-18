@@ -1,0 +1,65 @@
+diff --git a/node_modules/@strapi/content-manager/dist/admin/pages/ListView/components/BulkActions/PublishAction.js b/node_modules/@strapi/content-manager/dist/admin/pages/ListView/components/BulkActions/PublishAction.js
+index 3d975d9..85abf63 100644
+--- a/node_modules/@strapi/content-manager/dist/admin/pages/ListView/components/BulkActions/PublishAction.js
++++ b/node_modules/@strapi/content-manager/dist/admin/pages/ListView/components/BulkActions/PublishAction.js
+@@ -57,10 +57,35 @@ const TableComponent = styledComponents.styled(designSystem.RawTable)`
+  * EntryValidationText
+  * -----------------------------------------------------------------------------------------------*/ const formatErrorMessages = (errors, parentKey, formatMessage)=>{
+     const messages = [];
++    if (!errors || typeof errors !== 'object') {
++        return messages;
++    }
+     Object.entries(errors).forEach(([key, value])=>{
+         const currentKey = parentKey ? `${parentKey}.${key}` : key;
+-        if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+-            if ('id' in value && 'defaultMessage' in value) {
++        // Handle undefined or null values
++        if (value === undefined || value === null) {
++            messages.push(formatMessage({
++                id: 'components.Input.error.validation.required.withField',
++                defaultMessage: 'This field is required'
++            }, {
++                field: currentKey
++            }));
++        } else if (Array.isArray(value)) {
++            // Handle array of errors
++            value.forEach((item, index) => {
++                if (item && typeof item === 'object') {
++                    messages.push(...formatErrorMessages(item, `${currentKey}[${index}]`, formatMessage));
++                } else if (typeof item === 'string') {
++                    messages.push(formatMessage({
++                        id: `${item}.withField`,
++                        defaultMessage: item
++                    }, {
++                        field: `${currentKey}[${index}]`
++                    }));
++                }
++            });
++        } else if (typeof value === 'object') {
++            if ('id' in value && 'defaultMessage' in value && typeof value.id === 'string') {
+                 messages.push(formatMessage({
+                     id: `${value.id}.withField`,
+                     defaultMessage: value.defaultMessage
+@@ -71,13 +96,21 @@ const TableComponent = styledComponents.styled(designSystem.RawTable)`
+                 messages.push(...formatErrorMessages(// @ts-expect-error TODO: check why value is not compatible with FormErrors
+                 value, currentKey, formatMessage));
+             }
+-        } else {
++        } else if (typeof value === 'string') {
+             messages.push(formatMessage({
+                 id: `${value}.withField`,
+                 defaultMessage: value
+             }, {
+                 field: currentKey
+             }));
++        } else {
++            // Fallback for any other type
++            messages.push(formatMessage({
++                id: 'components.Input.error.validation.required.withField',
++                defaultMessage: 'Validation error'
++            }, {
++                field: currentKey
++            }));
+         }
+     });
+     return messages;

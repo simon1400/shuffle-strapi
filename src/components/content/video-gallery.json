@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_content_video_galleries",
+  "info": {
+    "displayName": "videoGallery",
+    "icon": "play",
+    "description": "Grid gallery for YouTube videos"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "videos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.video-item"
+    }
+  }
+}

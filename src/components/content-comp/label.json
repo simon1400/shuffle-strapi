@@ -10,7 +10,7 @@
     "text": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "hexColor": {
       "type": "string",
@@ -18,8 +18,8 @@
     },
     "invertText": {
       "type": "boolean",
-      "default": false,
-      "required": true
+      "required": true,
+      "default": false
     }
   }
 }

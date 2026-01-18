@@ -6,19 +6,14 @@
   },
   "options": {},
   "attributes": {
-    "text": {
-      "type": "customField",
-      "options": {
-        "preset": "defaultHtml"
-      },
-      "required": true,
-      "customField": "plugin::ckeditor5.CKEditor"
-    },
     "cta": {
-      "displayName": "cta",
       "type": "component",
-      "repeatable": false,
-      "component": "action.cta"
+      "component": "action.cta",
+      "repeatable": false
+    },
+    "textTest": {
+      "type": "customField",
+      "customField": "plugin::lexical.lexical"
     }
   }
 }

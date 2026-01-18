@@ -1,0 +1,54 @@
+{
+  "collectionName": "components_links_links",
+  "info": {
+    "displayName": "Links"
+  },
+  "options": {},
+  "attributes": {
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    },
+    "catalogs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::catalog.catalog"
+    },
+    "compares": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::compare.compare"
+    },
+    "contacts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contact.contact"
+    },
+    "globals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::global.global"
+    },
+    "homepages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::homepage.homepage"
+    },
+    "navigations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::navigation.navigation"
+    },
+    "parameters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::parameter.parameter"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}

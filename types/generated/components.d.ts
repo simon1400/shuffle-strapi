@@ -21,14 +21,8 @@ export interface ContentCompDescriptionBlockComp
     icon: 'bulletList';
   };
   attributes: {
-    contentText: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
+    contentTextTest: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
     cta: Schema.Attribute.Component<'action.cta', false>;
     icon: Schema.Attribute.Media<'images'>;
   };
@@ -46,9 +40,7 @@ export interface ContentCompLabel extends Struct.ComponentSchema {
     invertText: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
-    text: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -88,13 +80,8 @@ export interface ContentContentItem extends Struct.ComponentSchema {
     icon: 'filter';
   };
   attributes: {
-    contentText: Schema.Attribute.RichText &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
+    contentTextTest: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
     galery: Schema.Attribute.Media<'images', true>;
     title: Schema.Attribute.String;
   };
@@ -108,14 +95,8 @@ export interface ContentCtaBlock extends Struct.ComponentSchema {
   };
   attributes: {
     cta: Schema.Attribute.Component<'action.cta', false>;
-    text: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
+    textTest: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
   };
 }
 
@@ -132,6 +113,22 @@ export interface ContentDescriptionBlock extends Struct.ComponentSchema {
       true
     > &
       Schema.Attribute.Required;
+  };
+}
+
+export interface ContentImageTextCta extends Struct.ComponentSchema {
+  collectionName: 'components_content_image_text_ctas';
+  info: {
+    description: 'Block with image, title, text and CTA button';
+    displayName: 'ImageTextCta';
+    icon: 'picture';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'action.cta', false>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    textTest: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -154,6 +151,56 @@ export interface ContentShortArtciles extends Struct.ComponentSchema {
   };
   attributes: {
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+  };
+}
+
+export interface ContentVideoGallery extends Struct.ComponentSchema {
+  collectionName: 'components_content_video_galleries';
+  info: {
+    description: 'Grid gallery for YouTube videos';
+    displayName: 'videoGallery';
+    icon: 'play';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    videos: Schema.Attribute.Component<'content.video-item', true>;
+  };
+}
+
+export interface ContentVideoItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_video_items';
+  info: {
+    description: 'Single YouTube video item';
+    displayName: 'videoItem';
+    icon: 'play';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    youtubeUrl: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface LinksLinks extends Struct.ComponentSchema {
+  collectionName: 'components_links_links';
+  info: {
+    displayName: 'Links';
+  };
+  attributes: {
+    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    catalogs: Schema.Attribute.Relation<'oneToMany', 'api::catalog.catalog'>;
+    compares: Schema.Attribute.Relation<'oneToMany', 'api::compare.compare'>;
+    contacts: Schema.Attribute.Relation<'oneToMany', 'api::contact.contact'>;
+    globals: Schema.Attribute.Relation<'oneToMany', 'api::global.global'>;
+    homepages: Schema.Attribute.Relation<'oneToMany', 'api::homepage.homepage'>;
+    navigations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::navigation.navigation'
+    >;
+    parameters: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::parameter.parameter'
+    >;
+    products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
   };
 }
 
@@ -222,8 +269,12 @@ declare module '@strapi/strapi' {
       'content.content-item': ContentContentItem;
       'content.cta-block': ContentCtaBlock;
       'content.description-block': ContentDescriptionBlock;
+      'content.image-text-cta': ContentImageTextCta;
       'content.logo-carousel': ContentLogoCarousel;
       'content.short-artciles': ContentShortArtciles;
+      'content.video-gallery': ContentVideoGallery;
+      'content.video-item': ContentVideoItem;
+      'links.links': LinksLinks;
       'nav.nav': NavNav;
       'nav.nav-item': NavNavItem;
       'nav.soc-item': NavSocItem;

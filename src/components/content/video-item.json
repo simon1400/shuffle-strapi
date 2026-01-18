@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_content_video_items",
+  "info": {
+    "displayName": "videoItem",
+    "icon": "play",
+    "description": "Single YouTube video item"
+  },
+  "options": {},
+  "attributes": {
+    "youtubeUrl": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

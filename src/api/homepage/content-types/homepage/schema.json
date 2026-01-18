@@ -25,7 +25,8 @@
         "content.logo-carousel",
         "content.description-block",
         "content.content-item",
-        "content.compare-table"
+        "content.compare-table",
+        "content.image-text-cta"
       ],
       "required": true
     },

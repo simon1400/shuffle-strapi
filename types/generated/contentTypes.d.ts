@@ -34,6 +34,10 @@ export interface AdminApiToken extends Struct.CollectionTypeSchema {
         minLength: 1;
       }> &
       Schema.Attribute.DefaultTo<''>;
+    encryptedKey: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
     expiresAt: Schema.Attribute.DateTime;
     lastUsedAt: Schema.Attribute.DateTime;
     lifespan: Schema.Attribute.BigInteger;
@@ -196,6 +200,63 @@ export interface AdminRole extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     users: Schema.Attribute.Relation<'manyToMany', 'admin::user'>;
+  };
+}
+
+export interface AdminSession extends Struct.CollectionTypeSchema {
+  collectionName: 'strapi_sessions';
+  info: {
+    description: 'Session Manager storage';
+    displayName: 'Session';
+    name: 'Session';
+    pluralName: 'sessions';
+    singularName: 'session';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+    i18n: {
+      localized: false;
+    };
+  };
+  attributes: {
+    absoluteExpiresAt: Schema.Attribute.DateTime & Schema.Attribute.Private;
+    childId: Schema.Attribute.String & Schema.Attribute.Private;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    deviceId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
+    expiresAt: Schema.Attribute.DateTime &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'admin::session'> &
+      Schema.Attribute.Private;
+    origin: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sessionId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.Unique;
+    status: Schema.Attribute.String & Schema.Attribute.Private;
+    type: Schema.Attribute.String & Schema.Attribute.Private;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
   };
 }
 
@@ -391,16 +452,11 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         'content.description-block',
         'content.cta-block',
         'content.content-item',
+        'content.image-text-cta',
       ]
     >;
-    fullContent: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
+    fullContentTest: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
     fullMedia: Schema.Attribute.Media<'images' | 'videos'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -410,14 +466,8 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     metaData: Schema.Attribute.Component<'seo.meta-data', false>;
     publishedAt: Schema.Attribute.DateTime;
-    shortContent: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
+    shortContentTest: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
     shortImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String &
@@ -440,14 +490,8 @@ export interface ApiCatalogCatalog extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    content: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
+    contentTest: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -478,14 +522,8 @@ export interface ApiCompareCompare extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    contentText: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
+    contentTextTest: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -607,6 +645,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'content.description-block',
         'content.content-item',
         'content.compare-table',
+        'content.image-text-cta',
       ]
     > &
       Schema.Attribute.Required;
@@ -665,6 +704,7 @@ export interface ApiNavigationNavigation extends Struct.SingleTypeSchema {
 export interface ApiParameterParameter extends Struct.CollectionTypeSchema {
   collectionName: 'parameters';
   info: {
+    description: '';
     displayName: 'Parameter';
     pluralName: 'parameters';
     singularName: 'parameter';
@@ -683,9 +723,7 @@ export interface ApiParameterParameter extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -707,8 +745,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     benefits: Schema.Attribute.Component<
       'content-comp.description-block-comp',
       true
-    > &
-      Schema.Attribute.Required;
+    >;
     compare: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     content: Schema.Attribute.DynamicZone<
       [
@@ -718,9 +755,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         'content.cta-block',
         'content.content-item',
         'content.compare-table',
+        'content.image-text-cta',
+        'content.video-gallery',
       ]
-    > &
-      Schema.Attribute.Required;
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -738,15 +776,12 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     Parameters: Schema.Attribute.Component<'content-comp.parameter', true> &
       Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    shortContent: Schema.Attribute.RichText &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
+    shortContent: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
     shortIcon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    shortImage: Schema.Attribute.Media<'images'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    sortOrder: Schema.Attribute.Integer;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -1013,8 +1048,8 @@ export interface PluginUploadFile extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    alternativeText: Schema.Attribute.String;
-    caption: Schema.Attribute.String;
+    alternativeText: Schema.Attribute.Text;
+    caption: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1038,7 +1073,7 @@ export interface PluginUploadFile extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     mime: Schema.Attribute.String & Schema.Attribute.Required;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    previewUrl: Schema.Attribute.String;
+    previewUrl: Schema.Attribute.Text;
     provider: Schema.Attribute.String & Schema.Attribute.Required;
     provider_metadata: Schema.Attribute.JSON;
     publishedAt: Schema.Attribute.DateTime;
@@ -1047,7 +1082,7 @@ export interface PluginUploadFile extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    url: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.Text & Schema.Attribute.Required;
     width: Schema.Attribute.Integer;
   };
 }
@@ -1262,6 +1297,7 @@ declare module '@strapi/strapi' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::permission': AdminPermission;
       'admin::role': AdminRole;
+      'admin::session': AdminSession;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;

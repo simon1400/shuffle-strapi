@@ -15,18 +15,14 @@
       "type": "string",
       "required": true
     },
-    "content": {
-      "type": "customField",
-      "options": {
-        "preset": "defaultHtml"
-      },
-      "required": true,
-      "customField": "plugin::ckeditor5.CKEditor"
-    },
     "metaData": {
       "type": "component",
-      "repeatable": false,
-      "component": "seo.meta-data"
+      "component": "seo.meta-data",
+      "repeatable": false
+    },
+    "contentTest": {
+      "type": "customField",
+      "customField": "plugin::lexical.lexical"
     }
   }
 }

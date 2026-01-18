@@ -38,9 +38,11 @@
         "content.description-block",
         "content.cta-block",
         "content.content-item",
-        "content.compare-table"
+        "content.compare-table",
+        "content.image-text-cta",
+        "content.video-gallery"
       ],
-      "required": true
+      "required": false
     },
     "slug": {
       "type": "uid",
@@ -49,20 +51,20 @@
     },
     "metaData": {
       "type": "component",
-      "repeatable": false,
-      "component": "seo.meta-data"
+      "component": "seo.meta-data",
+      "repeatable": false
     },
     "Parameters": {
       "type": "component",
-      "repeatable": true,
       "component": "content-comp.parameter",
+      "repeatable": true,
       "required": true
     },
     "benefits": {
       "type": "component",
-      "repeatable": true,
       "component": "content-comp.description-block-comp",
-      "required": true
+      "repeatable": true,
+      "required": false
     },
     "shortIcon": {
       "type": "media",
@@ -73,22 +75,30 @@
       ]
     },
     "label": {
-      "displayName": "label",
       "type": "component",
-      "repeatable": true,
-      "component": "content-comp.label"
+      "component": "content-comp.label",
+      "repeatable": true
     },
     "compare": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::product.product"
     },
+    "sortOrder": {
+      "type": "integer",
+      "unique": false
+    },
     "shortContent": {
       "type": "customField",
-      "options": {
-        "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      "customField": "plugin::lexical.lexical"
+    },
+    "shortImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }
