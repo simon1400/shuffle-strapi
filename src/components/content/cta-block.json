@@ -11,9 +11,12 @@
       "component": "action.cta",
       "repeatable": false
     },
-    "textTest": {
+    "text": {
       "type": "customField",
-      "customField": "plugin::lexical.lexical"
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     }
   }
 }

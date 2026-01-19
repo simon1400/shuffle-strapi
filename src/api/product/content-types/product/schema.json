@@ -90,7 +90,10 @@
     },
     "shortContent": {
       "type": "customField",
-      "customField": "plugin::lexical.lexical"
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     },
     "shortImage": {
       "type": "media",

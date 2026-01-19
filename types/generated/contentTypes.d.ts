@@ -455,8 +455,13 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         'content.image-text-cta',
       ]
     >;
-    fullContentTest: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    fullContent: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     fullMedia: Schema.Attribute.Media<'images' | 'videos'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -466,8 +471,13 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     metaData: Schema.Attribute.Component<'seo.meta-data', false>;
     publishedAt: Schema.Attribute.DateTime;
-    shortContentTest: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    shortContent: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     shortImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String &
@@ -490,8 +500,13 @@ export interface ApiCatalogCatalog extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    contentTest: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    content: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -522,8 +537,13 @@ export interface ApiCompareCompare extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    contentTextTest: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    contentText: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -776,8 +796,13 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     Parameters: Schema.Attribute.Component<'content-comp.parameter', true> &
       Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    shortContent: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    shortContent: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     shortIcon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     shortImage: Schema.Attribute.Media<'images'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;

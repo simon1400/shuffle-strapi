@@ -20,9 +20,12 @@
       "component": "seo.meta-data",
       "repeatable": false
     },
-    "contentTest": {
+    "content": {
       "type": "customField",
-      "customField": "plugin::lexical.lexical"
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     }
   }
 }

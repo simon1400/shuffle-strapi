@@ -13,10 +13,7 @@ export default ({ env }) => ({
       },
     },
   },
-  'sortable-entries': {
-    enabled: true,
-  },
-  lexical: {
+  ckeditor5: {
     enabled: true,
   },
 });

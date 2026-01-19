@@ -16,9 +16,12 @@
         "images"
       ]
     },
-    "contentTextTest": {
+    "contentText": {
       "type": "customField",
-      "customField": "plugin::lexical.lexical"
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     }
   }
 }

@@ -56,13 +56,19 @@
         "content.image-text-cta"
       ]
     },
-    "shortContentTest": {
+    "shortContent": {
       "type": "customField",
-      "customField": "plugin::lexical.lexical"
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     },
-    "fullContentTest": {
+    "fullContent": {
       "type": "customField",
-      "customField": "plugin::lexical.lexical"
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     }
   }
 }

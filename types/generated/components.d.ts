@@ -21,8 +21,13 @@ export interface ContentCompDescriptionBlockComp
     icon: 'bulletList';
   };
   attributes: {
-    contentTextTest: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    contentText: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     cta: Schema.Attribute.Component<'action.cta', false>;
     icon: Schema.Attribute.Media<'images'>;
   };
@@ -80,8 +85,13 @@ export interface ContentContentItem extends Struct.ComponentSchema {
     icon: 'filter';
   };
   attributes: {
-    contentTextTest: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    contentText: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     galery: Schema.Attribute.Media<'images', true>;
     title: Schema.Attribute.String;
   };
@@ -95,8 +105,13 @@ export interface ContentCtaBlock extends Struct.ComponentSchema {
   };
   attributes: {
     cta: Schema.Attribute.Component<'action.cta', false>;
-    textTest: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    text: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
   };
 }
 
@@ -126,8 +141,13 @@ export interface ContentImageTextCta extends Struct.ComponentSchema {
   attributes: {
     cta: Schema.Attribute.Component<'action.cta', false>;
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    textTest: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::lexical.lexical'>;
+    text: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
