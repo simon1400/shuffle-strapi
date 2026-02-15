@@ -102,6 +102,10 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "showCompare": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
