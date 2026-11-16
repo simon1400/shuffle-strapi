@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_nav_footer_columns",
+  "info": {
+    "displayName": "footerColumn",
+    "icon": "layout",
+    "description": "Footer column: title + free rich text (addresses, contacts, links)"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    }
+  }
+}

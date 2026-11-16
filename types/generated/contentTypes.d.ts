@@ -702,8 +702,8 @@ export interface ApiNavigationNavigation extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    footer: Schema.Attribute.Component<'nav.nav', true> &
-      Schema.Attribute.Required;
+    footer: Schema.Attribute.Component<'nav.nav', true>;
+    footerColumns: Schema.Attribute.Component<'nav.footer-column', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

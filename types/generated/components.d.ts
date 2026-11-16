@@ -224,6 +224,25 @@ export interface LinksLinks extends Struct.ComponentSchema {
   };
 }
 
+export interface NavFooterColumn extends Struct.ComponentSchema {
+  collectionName: 'components_nav_footer_columns';
+  info: {
+    description: 'Footer column: title + free rich text (addresses, contacts, links)';
+    displayName: 'footerColumn';
+    icon: 'layout';
+  };
+  attributes: {
+    content: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface NavNav extends Struct.ComponentSchema {
   collectionName: 'components_nav_navs';
   info: {
@@ -295,6 +314,7 @@ declare module '@strapi/strapi' {
       'content.video-gallery': ContentVideoGallery;
       'content.video-item': ContentVideoItem;
       'links.links': LinksLinks;
+      'nav.footer-column': NavFooterColumn;
       'nav.nav': NavNav;
       'nav.nav-item': NavNavItem;
       'nav.soc-item': NavSocItem;

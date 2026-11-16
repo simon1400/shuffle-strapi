@@ -19,11 +19,17 @@
       "component": "nav.nav",
       "required": true
     },
+    "footerColumns": {
+      "displayName": "footerColumn",
+      "type": "component",
+      "repeatable": true,
+      "component": "nav.footer-column"
+    },
     "footer": {
       "type": "component",
       "repeatable": true,
       "component": "nav.nav",
-      "required": true
+      "required": false
     },
     "socNav": {
       "displayName": "socItem",
